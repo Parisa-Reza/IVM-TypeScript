@@ -1,37 +1,17 @@
-import { useState } from 'react';
+import { useProducts } from './hooks/useProducts';
 
 import { ProductCard } from './productCard/ProductCard';
 
 import './Products.css';
 
 export const Products = () => {
-  const [cart, setCart] = useState([]);
-
-  const products = [
-    {
-      id: '1',
-      name: 'Computer',
-      price: 70000,
-      quantity: 20,
-    },
-    {
-      id: '2',
-      name: 'Keyboard',
-      price: 5000,
-      quantity: 40,
-    },
-  ];
-
-  const productExistsInCart = (productId) =>
-    cart.some((product) => product.id === productId);
-
-  const addProductToCart = (product) => {
-    if (productExistsInCart(product.id)) {
-      alert('Already added!!!');
-      return;
-    }
-    setCart([...cart, product]);
-  };
+  const {
+    cart,
+    products,
+    isProductExistsInCart,
+    addProductToCart,
+    removeProductFromCart,
+  } = useProducts();
 
   return (
     <div className="products">
@@ -43,7 +23,9 @@ export const Products = () => {
           <ProductCard
             key={product.id}
             product={product}
+            isAddedToCart={isProductExistsInCart(product.id)}
             addToCart={addProductToCart}
+            removeFromCart={removeProductFromCart}
           />
         ))}
       </div>
