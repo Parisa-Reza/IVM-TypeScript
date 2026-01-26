@@ -4,10 +4,20 @@ import { Router , Request, Response} from "express";
 const adminUserRouter = Router();
 
 adminUserRouter.post("/", userController.createUser);
-adminUserRouter.get("/", (_req : Request, _res:Response) => {})
-adminUserRouter.get("/:id", (_req : Request, _res:Response) => {})
-adminUserRouter.put("/:id", (_req : Request, _res:Response) => {})
-adminUserRouter.delete("/:id", (_req : Request, _res:Response) => {})
-adminUserRouter.patch("/:id/restore", (_req : Request, _res:Response) => {})
+adminUserRouter.get("/", (_req : Request, _res:Response) => {
+    throw new Error("Not implemented");
+})
+adminUserRouter.get("/:id", (_req : Request, _res:Response) => {
+    throw new Error("Not implemented");
+})
+adminUserRouter.put("/:id", (_req : Request, _res:Response) => {
+    throw new Error("Not implemented");
+})
+adminUserRouter.delete("/:id", (_req : Request, _res:Response) => {
+    throw new Error("Not implemented");
+})
+adminUserRouter.patch("/:id/restore", (_req : Request, _res:Response) => {
+    throw new Error("Not implemented");
+})
 
 export default adminUserRouter;
