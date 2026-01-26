@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
 
 userSchema.plugin(softDeletePlugin);
 
+// soft delete plugin is added to the userSchema to provide soft delete functionality 
+
 
 export type UserDocument = User & mongoose.Document;
 // here we are creating a new type UserDocument that combines the User type from "@/types" with mongoose.Document. 

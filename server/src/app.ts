@@ -20,7 +20,7 @@ app.use(
 const port = envConfig.PORT;
 
 configureRouters(app);
-app.use(errorHandler);
+// here flow will go to routes/index.ts then to admin/index.ts and then to user.route.ts
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
