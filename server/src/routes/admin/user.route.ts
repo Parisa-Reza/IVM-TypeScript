@@ -1,12 +1,12 @@
-import { Router } from "express";
+import { Router , Request, Response} from "express";
 
 const adminUserRouter = Router();
 
-adminUserRouter.post("/", (req, res) => {})
-adminUserRouter.get("/", (req, res) => {})
-adminUserRouter.get("/:id", (req, res) => {})
-adminUserRouter.put("/:id", (req, res) => {})
-adminUserRouter.delete("/:id", (req, res) => {})
-adminUserRouter.patch("/:id/restore", (req, res) => {})
+adminUserRouter.post("/", (_req : Request, _res:Response) => {})
+adminUserRouter.get("/", (_req : Request, _res:Response) => {})
+adminUserRouter.get("/:id", (_req : Request, _res:Response) => {})
+adminUserRouter.put("/:id", (_req : Request, _res:Response) => {})
+adminUserRouter.delete("/:id", (_req : Request, _res:Response) => {})
+adminUserRouter.patch("/:id/restore", (_req : Request, _res:Response) => {})
 
 export default adminUserRouter;

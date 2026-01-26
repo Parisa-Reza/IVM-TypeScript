@@ -26,7 +26,7 @@ const config: EnvConfig = {
   MONGO_URI: getEnvVar("MONGO_URI"),
   DB_NAME: getEnvVar('DB_NAME'),
   JWT_SECRET: getEnvVar("JWT_SECRET"),
-  CORS_ORIGIN: getEnvVar("CORS_ORIGIN", "http://localhost:3000"),
+  CORS_ORIGIN: getEnvVar("CORS_ORIGIN", "http://localhost:5175"),
   BCRYPT_SALT_ROUNDS: parseInt(getEnvVar("BCRYPT_SALT_ROUNDS", "10"), 10),
 };
 

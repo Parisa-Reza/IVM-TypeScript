@@ -3,7 +3,7 @@ import express, { type Request, type Response } from "express";
 
 import { envConfig, connectDB } from "@/config";
 import configureRouters from "@/routes";
-import { errorHandler } from "@/middlewares";
+//import { errorHandler } from "@/middlewares";
 
 connectDB();
 
