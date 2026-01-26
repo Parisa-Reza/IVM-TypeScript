@@ -9,6 +9,7 @@ connectDB();
 
 const app = express();
 app.use(express.json());
+// here app.use(express.json()) will parse the incoming request body as JSON and populate req.body with the parsed data.
 
 app.use(
   cors({

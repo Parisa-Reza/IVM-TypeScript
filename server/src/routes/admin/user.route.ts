@@ -1,8 +1,9 @@
+import { userController } from "@/modules/user";
 import { Router , Request, Response} from "express";
 
 const adminUserRouter = Router();
 
-adminUserRouter.post("/", (_req : Request, _res:Response) => {})
+adminUserRouter.post("/", userController.createUser);
 adminUserRouter.get("/", (_req : Request, _res:Response) => {})
 adminUserRouter.get("/:id", (_req : Request, _res:Response) => {})
 adminUserRouter.put("/:id", (_req : Request, _res:Response) => {})
