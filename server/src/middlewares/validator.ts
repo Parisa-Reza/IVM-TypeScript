@@ -3,12 +3,11 @@ import { ZodSchema } from "zod";
 
 
 export const validateRequestBody = (schema: ZodSchema) => {
-    return (req: Request, res: Response, next: NextFunction) => {
+    return (req: Request, _res: Response, next: NextFunction) => {
 
-        const {error} = schema.safeParse(req.body);
-        if (error) {
-            return res.status(400).json({error: error.message});
-        }
+        schema.parse(req.body);
+        // here if validation fails, Zod will throw an error and skip to errorHandler middleware
+       
         next();
     }
 }
