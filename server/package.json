@@ -6,7 +6,8 @@
     "dev": "nodemon --exec tsx ./src/app.ts",
     "build": "tsc",
     "start": "node ./dist/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "script": "tsx"
   },
   "author": "",
   "license": "ISC",
