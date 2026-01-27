@@ -1,9 +1,9 @@
-import { z } from "zod";
-import bcrypt from "bcrypt";
+import { z } from 'zod';
+import bcrypt from 'bcrypt';
 
-import { CreateUserSchema } from "@/schemas";
-import { UserModel } from "./model";
-import { envConfig } from "@/config";
+import { CreateUserSchema } from '@/schemas';
+import { UserModel } from './model';
+import { envConfig } from '@/config';
 
 export const getHashedPassword = async (password: string) =>
   bcrypt.hash(password, envConfig.BCRYPT_SALT_ROUNDS);
@@ -22,10 +22,9 @@ export const createUser = async (
   return newUser; // returns newUser to controller
 };
 
-
-//Request → admin/user.route.ts → validator.ts (CreateUserSchema) → 
+//Request → admin/user.route.ts → validator.ts (CreateUserSchema) →
 // controller.ts → service.ts → model.ts → DB
 
 export const findUserByEmail = async (email: string) => {
   return UserModel.findOne({ email });
-}
+};

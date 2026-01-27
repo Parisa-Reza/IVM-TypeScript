@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DateMixin = z.object({
-  createAt : z.union([z.date(),z.string()]).optional(),
-  updatedAt : z.union([z.date(),z.string()]).optional(),
-})
+  createAt: z.union([z.date(), z.string()]).optional(),
+  updatedAt: z.union([z.date(), z.string()]).optional(),
+});
 export const CreatedMixin = z.object({
   createdAt: z.union([z.date(), z.string()]).optional(),
   createdBy: z.string().nullable().optional(),

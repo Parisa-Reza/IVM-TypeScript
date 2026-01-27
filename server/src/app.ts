@@ -1,9 +1,9 @@
-import cors from "cors";
-import express, { type Request, type Response } from "express";
+import cors from 'cors';
+import express from 'express';
 
-import { envConfig, connectDB } from "@/config";
-import configureRouters from "@/routes";
-import { errorHandler } from "@/middlewares";
+import { envConfig, connectDB } from '@/config';
+import configureRouters from '@/routes';
+import { errorHandler } from '@/middlewares';
 
 connectDB();
 
@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: envConfig.CORS_ORIGIN,
     credentials: true,
-  })
+  }),
 );
 
 const port = envConfig.PORT;
@@ -26,5 +26,7 @@ app.use(errorHandler);
 // here errorHandler middleware will handle any errors that occur in the route handlers
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(
+    `Example app listening on port  ${port}`,
+  );
 });

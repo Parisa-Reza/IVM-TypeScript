@@ -1,71 +1,26 @@
+import mongoose from 'mongoose';
 
-import mongoose from "mongoose";
+import { User } from '@/types';
+import { softDeletePlugin } from '@/common/mongoose-plugins';
 
-import {User} from "@/types";
-import { softDeletePlugin } from "@/common/mongoose-plugins";
-
-const userSchema = new mongoose.Schema({
-  name: {type: String, required: true},
-  email: {type: String, required: true, unique: true},
-  passwordHash: {type: String, required: true},
-  isDraft: {type: Boolean, default: false},
-  role: {type: String, enum: ["admin", "store-keeper"], required: true},
-}, {
-  timestamps: true,
-});
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    passwordHash: { type: String, required: true },
+    isDraft: { type: Boolean, default: false },
+    role: { type: String, enum: ['admin', 'store-keeper'], required: true },
+  },
+  {
+    timestamps: true,
+  },
+);
 
 userSchema.plugin(softDeletePlugin);
 
-// soft delete plugin is added to the userSchema to provide soft delete functionality 
-
+// soft delete plugin is added to the userSchema to provide soft delete functionality
 
 export type UserDocument = User & mongoose.Document;
-// here we are creating a new type UserDocument that combines the User type from "@/types" with mongoose.Document. 
-export const UserModel = mongoose.model<UserDocument>("User", userSchema)
+// here we are creating a new type UserDocument that combines the User type from "@/types" with mongoose.Document.
+export const UserModel = mongoose.model<UserDocument>('User', userSchema);
 // Finally, we create and export the UserModel using mongoose.model, specifying the UserDocument type to ensure type safety when interacting with the database.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
