@@ -16,7 +16,7 @@ export const createUser = async (
     name: userPayload.name,
     email: userPayload.email,
     passwordHash: hashedPassword,
-    role: 'shop-keeper',
+    role: 'store-keeper',
     isDraft: true,
   });
   return newUser; // returns newUser to controller
@@ -25,3 +25,7 @@ export const createUser = async (
 
 //Request → admin/user.route.ts → validator.ts (CreateUserSchema) → 
 // controller.ts → service.ts → model.ts → DB
+
+export const findUserByEmail = async (email: string) => {
+  return UserModel.findOne({ email });
+}

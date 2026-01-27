@@ -4,16 +4,48 @@ services:
     container_name: ivm-mongo
     restart: unless-stopped
     ports:
-      - "27024:27018"
+      - "27023:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
-      - ./.data/mongo_data:/data/db
-      - ./.data/mongo_config:/data/configdb
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
     networks:
       - ivm-network
+
+volumes:
+  mongo_data:
+  mongo_config:
 
 networks:
   ivm-network:
     driver: bridge
+
+
+################ the above one is for wsl #######################
+# Below is the original version using local paths for volumes
+# Uncomment and use if not using wsl 
+
+# services:
+#   mongo:
+#     image: mongo
+#     container_name: ivm-mongo
+#     restart: unless-stopped
+#     ports:
+#       - "27023:27017"
+#     environment:
+#       - MONGO_INITDB_ROOT_USERNAME=admin
+#       - MONGO_INITDB_ROOT_PASSWORD=password
+#     volumes:
+#       - ./.data/mongo_data:/data/db
+#       - ./.data/mongo_config:/data/configdb
+#     networks:
+#       - ivm-network
+
+# networks:
+#   ivm-network:
+#     driver: bridge
+
+
+

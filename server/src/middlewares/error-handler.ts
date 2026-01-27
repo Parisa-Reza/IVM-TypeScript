@@ -7,7 +7,7 @@ export const errorHandler = (
   res: Response,
   _next: NextFunction,
 ) => {
-  console.log("Error caught by errorHandler middleware");
+  console.log("Error caught by errorHandler---- middleware");
 
   // Handle Zod validation errors
   if (err instanceof ZodError) {
