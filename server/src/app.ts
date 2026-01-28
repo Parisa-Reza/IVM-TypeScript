@@ -24,22 +24,21 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(session({
-  secret: envConfig.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 24 * 60 * 60 * 1000, // 1 day
-    httpOnly: true,
-    secure: envConfig.ENVIRONMENT === 'production',
-    sameSite: envConfig.ENVIRONMENT === 'production' ? 'none' : 'lax',
-  },
-}));
+app.use(
+  session({
+    secret: envConfig.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+      httpOnly: true,
+      secure: envConfig.ENVIRONMENT === 'production',
+      sameSite: envConfig.ENVIRONMENT === 'production' ? 'none' : 'lax',
+    },
+  }),
+);
 
 app.use(passport.authenticate('session'));
-
-
-
 
 const port = envConfig.PORT;
 
