@@ -1,4 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
-export const authenticate =(_req :Request, _res :Response, _next :NextFunction) => {
-    
-    }   
+export const authenticate = (
+  req: Request,
+  _res: Response,
+  _next: NextFunction,
+) => {
+  if (req.user) {
+    // here if express request has user object named user then we will call next function
+    return _next();
+  }
+  return _res.status(401).json({ message: 'Unauthorized' });
+};
