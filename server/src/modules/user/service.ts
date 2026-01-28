@@ -30,8 +30,8 @@ export const findUserByEmail = async (email: string) => {
   return UserModel.findOne({ email });
 };
 
-export const verifyPassword = (user: User, password: string) => 
-{
- return bcrypt.compareSync(password, user.passwordHash)
-}
+export const verifyPassword = async (user: User, password: string) => {
+  return bcrypt.compare(password, user.passwordHash);
+};
+
 // here we compare the plain text password with the hashed password stored in the database using bcrypt's compareSync method.

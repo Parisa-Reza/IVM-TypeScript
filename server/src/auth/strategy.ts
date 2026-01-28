@@ -3,53 +3,45 @@
 
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserDocument, userService } from '@/modules/user';
+import { userService } from '@/modules/user';
+import { User } from '@/types';
+
 passport.use(
-  new LocalStrategy(function (email, password, done) {
-    userService
-      .findUserByEmail(email)
+  new LocalStrategy(async (email, password, done) => {
+    try {
       // Calls service layer to find user by email.
-      .then((user) => {
-        if (!user || user.deleted) {
-          return done(null, false);
-        }
+      const user = await userService.findUserByEmail(email);
+      if (!user || user.deleted) {
+        return done(null, false);
+      }
 
-        // done(error, user, info?) done function signature
-        //     If no user → authentication fails
-        // done(null, false) means no error, but login failed
-        // No error, but login failed
-        // req.user = undefined
-
-        // verify password
-        if (!userService.verifyPassword(user, password)) {
-          return done(null, false);
-        }
-        // here we call the verifyPassword function from the user service to compare the provided password with the stored hashed password.
-
-        return done(null, {
-          _id: user.id,
-          email: user.email,
-          role: user.role,
-        });
-      })
-      .catch((err) => done(err));
+      // Calls service layer to verify password.
+      const isPasswordValid = await userService.verifyPassword(user, password);
+      if (!isPasswordValid) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
   }),
 );
 
-passport.serializeUser((user: UserDocument, cb)=>{
-   process.nextTick(function(){
-  cb(null, {
-    _id : user._id,
-    email : user.email,
-    name : user.name,
-    role : user.role,
+// done(error, user, info?) done function signature
+//     If no user → authentication fails
+// done(null, false) means no error, but login failed
+// No error, but login failed
+// req.user = undefined
 
-  });
-})
+passport.serializeUser((user, done) => {
+  console.log('serializeUser called');
+  process.nextTick(() => done(null, user));
 });
+// serializeUser determines which data of the user object should be stored in the session.
+passport.deserializeUser((user: User, done) => {
+  console.log('deserializeUser called');
+  process.nextTick(() => done(null, user));
+});
+// deserializeUser is called on every request by passport.session middleware to retrieve user details from the session.
 
-passport.deserializeUser((user : UserDocument, cb)=>{
- process.nextTick(function(){
-   return  cb(null, user);
-})
-});
+//When we pass a function to process.nextTick(), we instruct the engine to invoke this function immediately after the current operation completes, before moving to the next phase in the event loop:
