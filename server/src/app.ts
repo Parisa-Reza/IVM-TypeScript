@@ -23,21 +23,26 @@ app.use(
   }),
 );
 
+// session configuration
 app.use(cookieParser());
 app.use(
   session({
     secret: envConfig.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    cookie: {
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
-      httpOnly: true,
-      secure: envConfig.ENVIRONMENT === 'production',
-      sameSite: envConfig.ENVIRONMENT === 'production' ? 'none' : 'lax',
-    },
+    // as we will use redis so for the time being we will comment it out
+    // cookie: {
+    //   maxAge: 24 * 60 * 60 * 1000, // 1 day
+    //   httpOnly: true,
+    //   secure: envConfig.ENVIRONMENT === 'production',
+    //   sameSite: envConfig.ENVIRONMENT === 'production' ? 'none' : 'lax',
+    // },
   }),
 );
 
+
+// Initialize passport 
+app.use(passport.initialize());
 app.use(passport.authenticate('session'));
 
 const port = envConfig.PORT;
