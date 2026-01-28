@@ -4,7 +4,7 @@ import adminRouter from './admin';
 import baseRouter from './health';
 
 const configureRouters = (app: Express) => {
-  app.use('/auth/',authRouter);
+  app.use('/auth/', authRouter);
   app.use('/api/', baseRouter);
   app.use('/api/admin', adminRouter);
 };
