@@ -2,6 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 import { envConfig, connectDB } from '@/config';
 import configureRouters from '@/routes';
@@ -14,7 +15,6 @@ connectDB();
 const app = express();
 app.use(express.json());
 // here app.use(express.json()) will parse the incoming request body as JSON and populate req.body with the parsed data.
-app.use(passport.initialize());
 
 app.use(
   cors({
@@ -22,6 +22,24 @@ app.use(
     credentials: true,
   }),
 );
+
+app.use(cookieParser());
+app.use(session({
+  secret: envConfig.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    httpOnly: true,
+    secure: envConfig.ENVIRONMENT === 'production',
+    sameSite: envConfig.ENVIRONMENT === 'production' ? 'none' : 'lax',
+  },
+}));
+
+app.use(passport.authenticate('session'));
+
+
+
 
 const port = envConfig.PORT;
 

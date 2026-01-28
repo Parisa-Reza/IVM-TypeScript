@@ -33,6 +33,7 @@ const config: EnvConfig = {
   BCRYPT_SALT_ROUNDS: parseInt(getEnvVar('BCRYPT_SALT_ROUNDS', '10'), 10),
   SESSION_SECRET: getEnvVar('SESSION_SECRET', 'default_session_secret'),
   CLIENT_URL: getEnvVar('CLIENT_URL', 'http://localhost:5175'),
+
 };
 
 export const envConfig = Object.freeze(config);
