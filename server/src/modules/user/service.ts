@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import { CreateUserSchema } from '@/schemas';
 import { UserModel } from './model';
 import { envConfig } from '@/config';
+import { User } from '@/types';
 
 export const getHashedPassword = async (password: string) =>
   bcrypt.hash(password, envConfig.BCRYPT_SALT_ROUNDS);
@@ -28,3 +29,9 @@ export const createUser = async (
 export const findUserByEmail = async (email: string) => {
   return UserModel.findOne({ email });
 };
+
+export const verifyPassword = (user: User, password: string) => 
+{
+ return bcrypt.compareSync(password, user.passwordHash)
+}
+// here we compare the plain text password with the hashed password stored in the database using bcrypt's compareSync method.

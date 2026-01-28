@@ -1,6 +1,8 @@
 import { connectDB } from '@/config';
 import { UserModel, userService } from '@/modules/user';
 
+// script is used for database migrationing and backpopulate korar jonno...ekta field add korle bai shob field e populate korte
+
 const seedAdmin = async () => {
   const argv = process.argv.slice(2);
   // here process.argv.slice(2) to skip the first two default arguments
