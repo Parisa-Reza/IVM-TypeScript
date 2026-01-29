@@ -13,7 +13,7 @@ const App: React.FC = () => {
       return;
     }
     axios.post('http://localhost:6071/auth/login/password', {
-      email,
+      username: email,
       password
     }).then(response => {
       console.log(response.data);

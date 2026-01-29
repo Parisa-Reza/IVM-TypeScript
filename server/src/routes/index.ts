@@ -1,11 +1,11 @@
 import { Express } from 'express';
-import authRouter from './auth';
+import authRouter from './auth.route';
 import adminRouter from './admin';
 import baseRouter from './health';
 
 const configureRouters = (app: Express) => {
-  app.use('/auth/', authRouter);
-  app.use('/api/', baseRouter);
+  app.use('/auth', authRouter);
+  app.use('/api', baseRouter);
   app.use('/api/admin', adminRouter);
 };
 

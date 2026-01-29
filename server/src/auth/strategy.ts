@@ -7,10 +7,10 @@ import { userService } from '@/modules/user';
 import { User } from '@/types';
 
 passport.use(
-  new LocalStrategy(async (email, password, done) => {
+  new LocalStrategy(async (username, password, done) => {
     try {
       // Calls service layer to find user by email.
-      const user = await userService.findUserByEmail(email);
+      const user = await userService.findUserByEmail(username);
       if (!user || user.deleted) {
         return done(null, false);
       }
@@ -20,7 +20,12 @@ passport.use(
       if (!isPasswordValid) {
         return done(null, false, { message: 'Incorrect password.' });
       }
-      return done(null, user);
+      return done(null, {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      });
     } catch (err) {
       return done(err);
     }
@@ -38,10 +43,11 @@ passport.serializeUser((user, done) => {
   process.nextTick(() => done(null, user));
 });
 // serializeUser determines which data of the user object should be stored in the session.
-passport.deserializeUser((user: User, done) => {
+passport.deserializeUser((user: Pick<User, '_id' | 'name' | 'email' | 'role'>, done) => {
   console.log('deserializeUser called');
   process.nextTick(() => done(null, user));
 });
 // deserializeUser is called on every request by passport.session middleware to retrieve user details from the session.
 
 //When we pass a function to process.nextTick(), we instruct the engine to invoke this function immediately after the current operation completes, before moving to the next phase in the event loop:
+export default passport;

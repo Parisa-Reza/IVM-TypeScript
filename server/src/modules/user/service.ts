@@ -27,7 +27,7 @@ export const createUser = async (
 // controller.ts → service.ts → model.ts → DB
 
 export const findUserByEmail = async (email: string) => {
-  return UserModel.findOne({ email });
+  return UserModel.findOne({ email }).select('_id name email passwordHash role deleted');
 };
 
 export const verifyPassword = async (user: User, password: string) => {
