@@ -1,0 +1,4 @@
+app.ts -> routes/index.ts -> admin/index.ts -> instance.route.ts ->
+->validator middleware to validate the instance zod schema
+-> instance controller
+-> instance service to create an instance

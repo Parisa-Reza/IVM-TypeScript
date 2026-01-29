@@ -6,7 +6,7 @@ import { Instance } from "@/types/instances";
 const instanceSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    subDomain: { type: String, required: true },
+    subDomain: { type: String},
   },
   {
     timestamps: true,
