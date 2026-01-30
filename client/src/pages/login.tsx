@@ -24,6 +24,8 @@ const App: React.FC = () => {
         },
       )
       .then((response) => {
+        // storing on local storage
+        localStorage.setItem('ivm-user', JSON.stringify(response.data.user))
         console.log(response.data);
         window.location.href = '/';
       })
