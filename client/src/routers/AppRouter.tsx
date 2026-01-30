@@ -1,16 +1,17 @@
-import App from "@/App";
-import Login from "@/pages/login";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
+
+import {InstancePage, Layout , Login} from "@/pages";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <Layout/>,
     children: [
       {
         index: true,
-        element: <div>home page</div>,
+        element : <InstancePage/>
       },
       {
         path: "dashboard",
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <div>products page</div>,
+      },
+      {
+        path: "instances",
+        element : <InstancePage/>
       },
       {
         path: "orders",

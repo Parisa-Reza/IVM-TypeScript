@@ -1,29 +1,36 @@
-import React, { useState } from "react";
-import axios from "axios";
+import http from '@/lib/http';
+import React, { useState } from 'react';
 
 const App: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password) {
-      setError("Please enter both email and password");
+      setError('Please enter both email and password');
       return;
     }
-    axios.post('http://localhost:6071/auth/login/password', {
-      username: email,
-      password
-    }).then(response => {
-      console.log(response.data);
-      window.location.href = '/';
-      
-    }).catch(error => {
-      console.error(error);
-      setError("Login failed. Please check your credentials.");
-    });
-
+    http
+      .post(
+        '/auth/login/password',
+        {
+          username: email,
+          password,
+        },
+        {
+          withCredentials: true,
+        },
+      )
+      .then((response) => {
+        console.log(response.data);
+        window.location.href = '/';
+      })
+      .catch((error) => {
+        console.error(error);
+        setError('Login failed. Please check your credentials.');
+      });
   };
 
   return (
